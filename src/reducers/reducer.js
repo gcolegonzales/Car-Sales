@@ -1,5 +1,3 @@
-
-
 const initialState = {
     additionalPrice: 0,
     car: {
@@ -7,7 +5,7 @@ const initialState = {
         name: '2019 Ford Mustang',
         image:
         'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-        features: []
+        features: [{id: 0, name: '', price: 0}]
     },
     additionalFeatures: [
         { id: 1, name: 'V-6 engine', price: 1500 },
@@ -20,16 +18,34 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'ADD_FEATURE':
+                const total = state.car.features.reduce((total, item) => {
+                    return total += item.price
+                })
+
             return {
                 ...state,
+                additionalPrice: total,
                 car: {
                     ...state.car,
                     features: [
-                        state.car.features,
+                        ...state.car.features,
                         action.payload
                     ]
                 }
             }
+
+        case 'REMOVE_FEATURE':
+                return {
+                    ...state,
+                    additionalPrice: total,
+                    car: {
+                        ...state.car,
+                        features: 
+                            state.car.features.filter((feature) => {
+                                return feature.id !== action.payload
+                            })
+                    }
+                }
 
         default:
             return initialState

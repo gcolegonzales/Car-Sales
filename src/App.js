@@ -5,7 +5,6 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 import { connect } from 'react-redux';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 
 const App = (props) => {
   // const state = {
@@ -25,21 +24,6 @@ const App = (props) => {
   //   ]
   // };
 
-  const addFeature = item => {
-    // dispatch an action here to add an item
-    dispatch({ type: 'ADD_FEATURE', payload: item })
-  }
-
-  const removeFeature = item => {
-    // dispatch an action here to remove an item
-    dispatch({ type: 'REMOVE_FEATURE', payload: item })
-  };
-
-  const buyItem = item => {
-    // dipsatch an action here to add an item
-    dispatch({ type: 'BUY_ITEM', payload: item })
-  };
-
   return (
     <div className="boxes">
       <div className="box">
@@ -47,7 +31,7 @@ const App = (props) => {
         <AddedFeatures car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures addFeature={addFeature} additionalFeatures={props.additionalFeatures} />
+        <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
